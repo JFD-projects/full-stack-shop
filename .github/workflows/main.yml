@@ -11,6 +11,7 @@ jobs:
 
     steps:
       - name: Development Code
+        if: always()
         uses: actions/checkout@v2
       - name: Use Node.js 16.3.0
         uses: actions/setup-node@v1
