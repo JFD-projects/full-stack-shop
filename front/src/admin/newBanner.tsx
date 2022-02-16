@@ -5,9 +5,8 @@ import SaveIcon from '@material-ui/icons/Save';
 import Button from '@material-ui/core/Button';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { IconButton } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { IBannerModel } from '../models/IBanner';
 
@@ -30,7 +29,7 @@ interface INewBanner {
 }
 const NewBanner: React.FC<INewBanner> = () => {
     const navigate = useNavigate();
-    const { control, handleSubmit, reset } = useForm({
+    const { control, handleSubmit } = useForm({
         defaultValues:
         {
             name: '',
@@ -44,7 +43,6 @@ const NewBanner: React.FC<INewBanner> = () => {
     const [file, setFile] = React.useState<File>()
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files
-        const reader = new FileReader();
         if (files) {
             setFile(files[0])
             setImage(URL.createObjectURL(files[0]))
@@ -55,7 +53,7 @@ const NewBanner: React.FC<INewBanner> = () => {
         const formData = new FormData();
         file && formData.append("file", file as Blob);
         formData.append("data", JSON.stringify(data));
-        let response = await axios.post('http://localhost:3300/api/banner/create', formData);
+        await axios.post('http://localhost:3300/api/banner/create', formData);
         navigate('/admin/bannersList/banners')
     };
     const classes = useStyles();
@@ -84,7 +82,7 @@ const NewBanner: React.FC<INewBanner> = () => {
                     render={({ field }) =>
                         <>
                             <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={(event) => handleUpload(event)} />
-                            <img src={image || urlDefault} />
+                            <img src={image || urlDefault} alt='' />
                             <label htmlFor="icon-button-file">
                                 <IconButton color="primary" aria-label="upload picture" component="span">
                                     <PhotoCamera />

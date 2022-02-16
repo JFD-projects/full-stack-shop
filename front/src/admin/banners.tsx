@@ -1,5 +1,4 @@
 import * as React from 'react';
-import store from '../store';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,13 +7,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
-import SettingsIcon from '@material-ui/icons/Settings';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { IconButton } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import ConfirmDialog from './common/confirmDialog';
 import axios from 'axios';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { IBannerModel } from '../models/IBanner';
 
 
@@ -94,7 +90,7 @@ const Banner: React.FC<IBanner> = () => {
                             <TableCell className={classes.block} align="center">{banner.description}</TableCell>
 
                             <TableCell className={classes.block} align="center">
-                                <img src={`http://localhost:3300/${banner.image}`} className={classes.image} />
+                                <img src={`http://localhost:3300/${banner.image}`} alt='' className={classes.image} />
                             </TableCell>
                             <TableCell className={classes.block} align="center">
                                 <IconButton

@@ -3,11 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import Button from '@material-ui/core/Button';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { IUser } from '../models/IUser';
 
@@ -41,9 +39,8 @@ interface INewUser {
 }
 const NewUser: React.FC<INewUser> = () => {
     const navigate = useNavigate();
-    const { id } = useParams()
 
-    const { control, handleSubmit, reset } = useForm({
+    const { control, handleSubmit } = useForm({
         defaultValues:
         {
             name: '',
@@ -85,7 +82,7 @@ const NewUser: React.FC<INewUser> = () => {
     // }
 
     const onSubmit = async (data: IUser) => {
-        const response = await axios.post('http://localhost:3300/api/user/registration', data);
+        await axios.post('http://localhost:3300/api/user/registration', data);
         // data.image = image || urlDefault
         navigate('/admin/usersList/users')
     };

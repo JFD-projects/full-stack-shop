@@ -61,18 +61,18 @@ const New: React.FC<INew> = () => {
     });
 
     const [productById, setProductById] = React.useState<IProduct>()
-    const getProductById: any = async () => {
-        const response = await axios.get(`http://localhost:3300/api/product/getOne`, { params: { id } })
-        return response.data
-    }
     React.useEffect(() => {
+        const getProductById: any = async () => {
+            const response = await axios.get(`http://localhost:3300/api/product/getOne`, { params: { id } })
+            return response.data
+        }
         if (id) {
             (async () => {
                 const product = await getProductById()
                 setProductById(product)
             })()
         }
-    }, [getProductById, id])
+    }, [id])
 
     React.useEffect(() => {
         if (productById) {

@@ -91,19 +91,19 @@ const ProductPage: React.FC<IProductPage> = () => {
         setFaforite(!isFavorite)
     }
     const [productById, setProductById] = React.useState<IProduct>()
-    const getProductById: any = async () => {
-        if (id) {
-            const response = await axios.get(`http://localhost:3300/api/product/getOne`, { params: { id } })
-            return response.data
-        }
-
-    }
     React.useEffect(() => {
+        const getProductById: any = async () => {
+            if (id) {
+                const response = await axios.get(`http://localhost:3300/api/product/getOne`, { params: { id } })
+                return response.data
+            }
+
+        }
         (async () => {
             const product = await getProductById()
             setProductById(product)
         })()
-    }, [getProductById])
+    }, [id])
 
     return (
         <div className={classes.root}>

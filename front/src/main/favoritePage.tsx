@@ -32,18 +32,18 @@ const FavoriteCart: React.FC<IFavoriteCart> = () => {
     const productStore = store.getState().favorite
 
     const [productById, setProductById] = React.useState<IProduct[]>([])
-    const getProductById: any = async () => {
-        const response = await axios.post(`http://localhost:3300/api/product/getMany`, productStore)
-        return response.data
-    }
     React.useEffect(() => {
+        const getProductById: any = async () => {
+            const response = await axios.post(`http://localhost:3300/api/product/getMany`, productStore)
+            return response.data
+        }
         if (productStore) {
             (async () => {
                 const product = await getProductById()
                 setProductById(product)
             })()
         }
-    }, [productStore, getProductById])
+    }, [productStore])
 
     const dispatch = useCommonDispatch();
     const [dialogIsOpen, setDialog] = React.useState(false)

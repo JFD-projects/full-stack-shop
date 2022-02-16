@@ -31,18 +31,18 @@ const Cart: React.FC<ICart> = () => {
     const productStore = store.getState().cart
 
     const [productById, setProductById] = React.useState<IProduct[]>([])
-    const getProductById: any = async () => {
-        const response = await axios.post(`http://localhost:3300/api/product/getMany`, productStore)
-        return response.data
-    }
     React.useEffect(() => {
+        const getProductById: any = async () => {
+            const response = await axios.post(`http://localhost:3300/api/product/getMany`, productStore)
+            return response.data
+        }
         if (productStore) {
             (async () => {
                 const product = await getProductById()
                 setProductById(product)
             })()
         }
-    }, [productStore, getProductById])
+    }, [productStore])
 
 
     const dispatch = useCommonDispatch();

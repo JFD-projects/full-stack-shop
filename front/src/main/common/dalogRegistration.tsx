@@ -35,7 +35,7 @@ const DialogRegisration: React.FC<IDialogRegisration> = (props) => {
     const handleClose = (isConfirmed?: boolean) => {
         props.onClose(isConfirmed)
     }
-    const { control, handleSubmit, reset } = useForm({
+    const { control, handleSubmit } = useForm({
         defaultValues:
         {
             email: '',
