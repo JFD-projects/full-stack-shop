@@ -1,6 +1,5 @@
 import React from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
-import store from '../../store';
 
 interface IConfirmDialog {
     isOpen: boolean,
@@ -8,7 +7,6 @@ interface IConfirmDialog {
     info: string
 }
 const ConfirmDialog: React.FC<IConfirmDialog> = (props) => {
-    const productStore = store.getState();
     const handleClose = (isConfirmed?: boolean) => {
         props.onClose(isConfirmed)
     }

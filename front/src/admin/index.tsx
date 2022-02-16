@@ -4,16 +4,32 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import InboxIcon from '@material-ui/icons/Inbox';
 import { Routes, Link, Route } from 'react-router-dom';
 import Catalog from './catalog';
-import Users from './users';
 import Delivery from './delivery';
+import UsersList from './usersList';
+import Main from '../main';
+import BannersList from './bannersList';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            paddingLeft: '6rem',
+        },
+    }),
+);
+
+
 interface IAdmin {
 
 }
 const Admin: React.FC<IAdmin> = () => {
+    const classes = useStyles();
     const menu = [
+        { text: "Main", link: "/main" },
         { text: "Catalog", link: "catalog" },
-        { text: "Users", link: "users" },
-        { text: "Delivery", link: "delivery" }
+        { text: "UsersList", link: "usersList" },
+        { text: "Delivery", link: "delivery" },
+        { text: "BannersList", link: "bannersList" }
     ]
     return <div>
         <Drawer
@@ -33,11 +49,13 @@ const Admin: React.FC<IAdmin> = () => {
                 ))}
             </List>
         </Drawer>
-        <div className='container p-5'>
+        <div className={`container ${classes.root}`}>
             <Routes>
+                <Route path="/*" element={<Main />} />
                 <Route path="catalog/*" element={<Catalog />} />
-                <Route path="users/" element={<Users />} />
+                <Route path="usersList/*" element={<UsersList />} />
                 <Route path="delivery/" element={<Delivery />} />
+                <Route path="bannersList/*" element={<BannersList />} />
             </Routes>
         </div>
 

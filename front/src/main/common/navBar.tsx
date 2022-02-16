@@ -2,7 +2,6 @@ import { AppBar, Toolbar, Typography, Button, makeStyles, IconButton } from '@ma
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import HomeIcon from '@material-ui/icons/Home';
 import Badge from '@material-ui/core/Badge';
 import store from '../../store';
 import logo from '../../image/logo.jpg'
@@ -55,7 +54,7 @@ const NavBar: React.FC<INavBar> = () => {
         <Toolbar className={classes.root}>
             <Typography variant="h6" >
                 <Button component={Link} to={'/'} >
-                    <img src={logo} className={classes.logo} />
+                    <img src={logo} alt='' className={classes.logo} />
                 </Button>
                 <Button component={Link} to={'/contactsPage'} className={classes.phone}>+7 981 844 80 74</Button>
             </Typography>

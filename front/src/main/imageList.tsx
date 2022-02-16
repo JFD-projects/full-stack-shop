@@ -7,6 +7,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import image from '../image/sale.jpg';
+import { IBannerModel } from '../models/IBanner';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -17,54 +18,43 @@ const useStyles = makeStyles((theme: Theme) =>
             overflow: 'hidden',
             backgroundColor: theme.palette.background.paper,
             paddingLeft: '1rem',
-
         },
         imageList: {
             width: 450,
-            height: 378,
-            margin: '1rem',
+            // height: 378,
+            padding: '10px'
+            // margin: '1rem',
+        },
+        imageListItem: {
+            margin: '15px'
+            // padding: '15px'
+        },
+        imageListItemBar: {
+            marginLeft: '15px'
         },
         icon: {
             color: 'rgba(255, 255, 255, 0.54)',
         },
     }),
 );
-
-
-const itemData = [
-    {
-        img: image,
-        title: 'Image',
-        author: 'author',
-    }, {
-        img: image,
-        title: 'Image',
-        author: 'author',
-    }, {
-        img: image,
-        title: 'Image',
-        author: 'author',
-    }, {
-        img: image,
-        title: 'Image',
-        author: 'author',
-    },
-];
-
-export default function TitlebarImageList() {
+interface IImage {
+    banner: Array<IBannerModel>
+}
+const Image: React.FC<IImage> = (props) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <ImageList rowHeight={180} className={classes.imageList}>
-                {itemData.map((item) => (
-                    <ImageListItem key={item.img}>
-                        <img src={item.img} alt={item.title} />
+            <ImageList className={classes.imageList}>
+                {props.banner.map((item) => (
+                    <ImageListItem key={item.id} >
+                        <img src={`http://localhost:3300/${item.image}`} alt={item.name} className={classes.imageListItem} />
                         <ImageListItemBar
-                            title={item.title}
-                            subtitle={<span>by: {item.author}</span>}
+                            className={classes.imageListItemBar}
+                            title={item.description}
+                            // subtitle={<span>by: {item.author}</span>}
                             actionIcon={
-                                <IconButton aria-label={`info about ${item.title}`} className={classes.icon}>
+                                <IconButton aria-label={`info about ${item.description}`} className={classes.icon}>
                                     <InfoIcon />
                                 </IconButton>
                             }
@@ -75,3 +65,5 @@ export default function TitlebarImageList() {
         </div>
     );
 }
+
+export default Image;

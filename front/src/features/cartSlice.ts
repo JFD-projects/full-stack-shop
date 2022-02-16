@@ -1,5 +1,4 @@
 import { setToLocalStorage, getFromLocalStorage } from './../services/localStorage';
-import { IProduct } from '../models/IProduct';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: string[] = getFromLocalStorage('cart') || []

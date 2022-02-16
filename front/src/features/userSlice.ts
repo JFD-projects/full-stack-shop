@@ -1,4 +1,4 @@
-import { setToLocalStorage, getFromLocalStorage } from './../services/localStorage';
+import { getFromLocalStorage } from './../services/localStorage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IUser } from '../models/IUser';
 import jwt_decode from "jwt-decode";

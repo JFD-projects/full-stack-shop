@@ -42,7 +42,7 @@ const Cart: React.FC<ICart> = () => {
                 setProductById(product)
             })()
         }
-    }, [productStore])
+    }, [productStore, getProductById])
 
 
     const dispatch = useCommonDispatch();

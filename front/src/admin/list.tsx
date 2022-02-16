@@ -1,5 +1,4 @@
 import * as React from 'react';
-import store from '../store';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,6 +14,8 @@ import { Link } from 'react-router-dom';
 import ConfirmDialog from './common/confirmDialog';
 import axios from 'axios';
 import { IProduct } from '../models/IProduct';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,15 +48,15 @@ const List: React.FC<IList> = state => {
     }
 
     const handleDialogClose = async (isConfirmed?: boolean) => {
-        // if (isConfirmed) {
-        //     dispatch(removeProduct(productIdToDelete))
-        // }
-        const response = await axios.delete('http://localhost:3300/api/product/remove',
-            { data: { id: productIdToDelete } });
-        setProducts(products)
-        setProductIdToDelete('')
+        if (isConfirmed) {
+            const response = await axios.delete('http://localhost:3300/api/product/remove',
+                { data: { id: productIdToDelete } });
+            setProducts(products)
+            setProductIdToDelete('')
+            setDialog(false)
+            return response.data.json
+        }
         setDialog(false)
-        return response.data.json
     }
     React.useEffect(() => {
         (async () => {
@@ -64,12 +65,6 @@ const List: React.FC<IList> = state => {
         })()
     }, [dialogIsOpen])
 
-    // products.forEach((p) => {
-    //     console.log(p);
-
-    //     dispatch(addProduct(p))
-    //     console.log(productStore);
-    // })
 
     return <>
         <TableContainer component={Paper}>
@@ -93,8 +88,18 @@ const List: React.FC<IList> = state => {
                             </TableCell>
                             <TableCell align="center">{product.price}{product.currency}</TableCell>
                             <TableCell align="center">{product.amount}</TableCell>
-                            <TableCell align="center">{product.description}</TableCell>
-                            <TableCell align="center">{product.fullDescription}</TableCell>
+                            <TableCell align="center">
+                                <TextareaAutosize
+                                    maxRows={4}
+                                    defaultValue={product.description}
+                                />
+                            </TableCell>
+                            <TableCell align="center">
+                                <TextareaAutosize
+                                    maxRows={4}
+                                    defaultValue={product.fullDescription}
+                                />
+                            </TableCell>
                             <TableCell align="center"><IconButton
                                 color="secondary"
                                 onClick={() => handleDel(product.id)}

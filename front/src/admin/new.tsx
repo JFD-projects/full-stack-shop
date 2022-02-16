@@ -72,30 +72,40 @@ const New: React.FC<INew> = () => {
                 setProductById(product)
             })()
         }
-    }, [id])
+    }, [getProductById, id])
 
     React.useEffect(() => {
         if (productById) {
             reset(productById)
         }
-    }, [productById])
+    }, [productById, reset])
 
     const urlDefault = 'http://localhost:3300/images/defaultImage.png'
     const [image, setImage] = React.useState<string | null>(null)
+    const [file, setFile] = React.useState<File>()
+
     const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files
-        const reader = new FileReader();
         if (file) {
+            setFile(file[0])
             setImage(URL.createObjectURL(file[0]))
         }
     }
 
     const onSubmit = async (data: IProduct) => {
-        data.image = image || urlDefault
+        const formData = new FormData();
+        file && formData.append("file", file as Blob);
+        formData.append("data", JSON.stringify(data));
+
+        // data.image = image || urlDefault
         if (id) {
-            let response = await axios.put('http://localhost:3300/api/product/edit', data);
+            let response = await axios.put('http://localhost:3300/api/product/edit', formData);
+            console.log(response);
+
         } else {
-            let response = await axios.post('http://localhost:3300/api/product/create', data);
+            let response = await axios.post('http://localhost:3300/api/product/create', formData);
+            console.log(response);
+
         }
         navigate('/admin/catalog/list')
     };
@@ -162,7 +172,7 @@ const New: React.FC<INew> = () => {
                     render={({ field }) =>
                         <>
                             <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={(event) => handleUpload(event)} />
-                            <img src={image || urlDefault} />
+                            <img src={image || urlDefault} alt='' />
                             <label htmlFor="icon-button-file">
                                 <IconButton color="primary" aria-label="upload picture" component="span">
                                     <PhotoCamera />

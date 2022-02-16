@@ -68,6 +68,16 @@ class UserController {
             return res.json(error)
         }
     }
+    async remove(req, res) {
+        try {
+            console.log(req.body.id);
+            await User.destroy({ where: { id: req.body.id } })
+            return res.json('delete')
+        }
+        catch (e) {
+            return res.status(500).json(error)
+        }
+    }
 }
 
 module.exports = new UserController()

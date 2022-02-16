@@ -1,12 +1,11 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton } from '@material-ui/core';
 import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
 import store from '../store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useCommonDispatch } from '../hooks/useCommonDispatch';
 import ConfirmDialog from '../admin/common/confirmDialog';
-import { addFavoriteProduct, decrimentFavoriteProductCount, removeFavoriteProduct } from '../features/favoriteSlice';
+import { removeFavoriteProduct } from '../features/favoriteSlice';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { addCartProduct, removeProduct } from '../features/cartSlice';
 import { IProduct } from '../models/IProduct';
@@ -44,7 +43,7 @@ const FavoriteCart: React.FC<IFavoriteCart> = () => {
                 setProductById(product)
             })()
         }
-    }, [productStore])
+    }, [productStore, getProductById])
 
     const dispatch = useCommonDispatch();
     const [dialogIsOpen, setDialog] = React.useState(false)

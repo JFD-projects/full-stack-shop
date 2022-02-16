@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import { setToLocalStorage } from '../services/localStorage';
 import { useCommonDispatch } from '../hooks/useCommonDispatch';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
 import { setUser } from '../features/userSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +29,6 @@ interface IUserPage { }
 
 const UserPage: React.FC<IUserPage> = () => {
     const classes = useStyles();
-    const navigate = useNavigate();
     const dispatch = useCommonDispatch()
 
     const [userById, setUserById] = React.useState<IUser | null>(store.getState().user)

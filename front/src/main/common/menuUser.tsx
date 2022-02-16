@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu, { MenuProps } from '@material-ui/core/Menu';
@@ -7,7 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, useNavigate } from 'react-router-dom';
 import { IUser } from '../../models/IUser';
-import store from '../../store';
 import { useCommonDispatch } from '../../hooks/useCommonDispatch';
 import { setUser } from '../../features/userSlice';
 

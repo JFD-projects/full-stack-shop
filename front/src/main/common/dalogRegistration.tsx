@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, TextField } from '@material-ui/core';
+import { Dialog, DialogTitle, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import store from '../../store';
 import { Controller, useForm } from 'react-hook-form';
 import { IUser } from '../../models/IUser';
 import axios from 'axios';

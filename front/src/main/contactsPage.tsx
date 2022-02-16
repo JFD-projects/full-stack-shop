@@ -1,9 +1,12 @@
 import React from 'react';
+import Map from './map'
 
 interface IContacts { }
 
 const Contacts: React.FC<IContacts> = () => {
-    return <>contscts</>;
+    return <>
+        <Map />
+    </>;
 };
 
 export default Contacts;

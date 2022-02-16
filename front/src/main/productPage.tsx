@@ -1,5 +1,5 @@
 import { createStyles, IconButton, makeStyles, Theme } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import store from '../store';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
@@ -9,7 +9,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { addFavoriteProduct, removeFavoriteProduct } from '../features/favoriteSlice';
 import axios from 'axios';
 import { IProduct } from '../models/IProduct';
-import { getFromLocalStorage } from '../services/localStorage';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -104,7 +103,7 @@ const ProductPage: React.FC<IProductPage> = () => {
             const product = await getProductById()
             setProductById(product)
         })()
-    }, [])
+    }, [getProductById])
 
     return (
         <div className={classes.root}>
@@ -115,7 +114,7 @@ const ProductPage: React.FC<IProductPage> = () => {
             </div>
             <div className={classes.content}>
                 <div className={classes.leftBlock} >
-                    <img src={productById?.image} className={classes.image} />
+                    <img src={productById?.image} alt='' className={classes.image} />
                 </div>
                 <div className={classes.rightBlock}>
                     <div>
@@ -125,7 +124,7 @@ const ProductPage: React.FC<IProductPage> = () => {
                     <div className={classes.action}>
                         <div className={classes.price}>
                             {productById?.price}{productById?.currency} <br />
-                            <img src={productById?.image} className={classes.imageMini} /><br />
+                            <img src={productById?.image} alt='' className={classes.imageMini} /><br />
                             {productById?.amount} шт. в магазине
                         </div>
                         {productById ?

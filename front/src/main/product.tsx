@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -24,22 +24,42 @@ import store from '../store';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            width: '30%',
-            padding: '1rem',
-            marginTop: '1rem',
-            height: '100%',
+            width: '20%',
+            padding: '0.2rem',
+            margin: '1rem 0.5rem 1rem 0.5rem',
+            height: '25rem',
             position: 'relative'
         },
+        link: {
+            padding: '0',
+            height: '100%'
+        },
+        header: {
+            padding: '0',
+        },
         media: {
-            height: 0,
-            paddingTop: '56.25%',
+            // padding: '5px'
+            // height: 0,
+            // paddingTop: '56.25%',
         },
         avatar: {
             backgroundColor: red[500],
         },
-        action: { position: 'absolute', bottom: '0' },
+        content: {
+            position: 'absolute',
+            // top: '360px'
+        },
+        action: {
+            bottom: '0',
+            padding: '0',
+            position: 'absolute'
+        },
         favoriteActive: {
             color: 'red'
+        },
+        image: {
+            height: '10rem',
+            paddingLeft: '3rem'
         }
     }),
 );
@@ -75,6 +95,7 @@ const Product: React.FC<IProduct> = (props) => {
         setProductIdInfo('')
         setDialog(false)
     }
+    // console.log(props);
 
     return (<>
         <Card className={classes.root}>
@@ -82,6 +103,7 @@ const Product: React.FC<IProduct> = (props) => {
                 to={`/product/${props.id}`}
                 component={RouterLink}
                 color="inherit"
+                className={classes.link}
             >
                 <CardHeader
                     avatar={
@@ -91,15 +113,17 @@ const Product: React.FC<IProduct> = (props) => {
                     }
                     title={props.name}
                     subheader={props.price + props.currency}
+                    className={classes.header}
                 />
                 <CardMedia
                     className={classes.media}
-                    image={props.image}
                     title={props.name}
-                />
+                >
+                    <img src={`http://localhost:3300/${props.image}`} alt="" className={classes.image} />
+                </CardMedia>
             </Link>
-            <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
+            <CardContent className={classes.content}>
+                <Typography variant="body2" color="textSecondary" component="p" >
                     {props.description}<br />
                     {props.amount} штук
                 </Typography>

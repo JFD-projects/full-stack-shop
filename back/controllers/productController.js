@@ -5,10 +5,25 @@ const Op = Sequelize.Op
 class ProductController {
     async create(req, res, next) {
         try {
-            await Product.create(req.body)
+            const data = JSON.parse(req.body.data)
+            await Product.create({ ...data, image: req.file.path.replace('assets', '') })
             return res.json('ok')
         } catch (error) {
             return res.json(error)
+        }
+    }
+    async edit(req, res) {
+        try {
+            const product = JSON.parse(req.body.data)
+            const data = await Product.findOne({ where: { id: product.id } })
+            if (data === null) {
+                throw new Error({ error: 'не найдено' })
+            }
+            await data.set(product)
+            await data.save()
+            return res.json(data)
+        } catch (error) {
+            return res.status(500).json(error)
         }
     }
     async getAll(req, res) {
@@ -50,19 +65,7 @@ class ProductController {
             return res.status(500).json(error)
         }
     }
-    async edit(req, res) {
-        try {
-            const data = await Product.findOne({ where: { id: req.body.id } })
-            if (data === null) {
-                throw new Error({ error: 'не найдено' })
-            }
-            await data.set(req.body)
-            await data.save()
-            return res.json(data)
-        } catch (error) {
-            return res.status(500).json(error)
-        }
-    }
+
 }
 
 module.exports = new ProductController()

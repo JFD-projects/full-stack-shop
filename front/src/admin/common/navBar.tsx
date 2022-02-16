@@ -11,22 +11,28 @@ const useStyles = makeStyles((theme) => ({
     root: { display: "flex", justifyContent: "space-between" }
 }));
 const NavBar: React.FC<INavBar> = () => {
-
     const classes = useStyles()
     let { pathname } = useLocation();
     const getTitle = () => {
         switch (pathname) {
             case '/admin/catalog/list':
                 return 'Каталог'
+            case '/admin/bannersList/banners':
+                return 'Банннеры'
             case '/admin/catalog/new':
                 return 'Новый товар'
+            case '/admin/usersList/new':
+                return 'Новый пользователь'
+            case '/admin/bannersList/new':
+                return 'Новый баннер'
+            case '/admin/usersList/users':
+                return 'Список пользователей'
             case pathname.startsWith('/admin/catalog/new/') && pathname:
                 return 'Редакторвать'
             default:
                 return "Админка";
         }
     }
-
 
     return <AppBar position="static">
         <Toolbar className={classes.root}>
@@ -36,7 +42,7 @@ const NavBar: React.FC<INavBar> = () => {
             <div>
                 <Button component={Link} to={'new'} color="inherit">Добавить</Button>
                 <Button component={Link} to={'/'} color="inherit">
-                    <IconButton aria-label="add to shopping cart">
+                    <IconButton>
                         <HomeIcon />
                     </IconButton>
                 </Button>

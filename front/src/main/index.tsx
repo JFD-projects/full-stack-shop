@@ -14,10 +14,11 @@ import Contacts from './contactsPage';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            height: '100%'
+            height: '100vh'
         },
         content: {
-            height: '100vh'
+            // height: '100vh'
+            // height: 'calc(100% - 40px)'
         }
     }),
 );
@@ -52,8 +53,8 @@ const Main: React.FC<IMain> = () => {
                     <Route path='contactsPage' element={<Contacts />} />
                 </Routes>
             </div>
+            <Footer />
         </div>
-        <Footer />
     </>
 }
 export default Main

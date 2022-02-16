@@ -21,7 +21,7 @@ const ConfirmDialog: React.FC<IConfirmDialog> = (props) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => handleClose()} color="primary" >
+                <Button onClick={() => handleClose(false)} color="primary" >
                     Отмена
                 </Button>
                 <Button onClick={() => handleClose(true)} color="primary" autoFocus>

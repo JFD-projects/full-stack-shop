@@ -1,4 +1,4 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton } from '@material-ui/core';
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import * as React from 'react';
 import Switch from '@material-ui/core/Switch';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
